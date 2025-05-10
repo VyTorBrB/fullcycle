@@ -1,0 +1,25 @@
+# ---------- Stage 1: Build ----------
+FROM golang:1.24-alpine AS builder
+
+ENV APP_DIR=app
+
+# Set working directory
+WORKDIR /${APP_DIR}
+
+# Copy the rest of the source code
+COPY ./src .
+
+# Build statically-linked binary (no debug info to reduce size)
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o ${APP_DIR}
+
+# ---------- Stage 2: Final minimal image ----------
+FROM scratch
+
+# Set working directory
+WORKDIR /app
+
+# Copy binary from builder
+COPY --from=builder /app/app .
+
+# Command to run the app
+ENTRYPOINT ["./app"]

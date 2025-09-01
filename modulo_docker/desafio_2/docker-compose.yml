@@ -11,6 +11,8 @@ services:
       context: .
       dockerfile: Dockerfile.app
     restart: always
+    volumes:
+      - ./src/app:/app/
     entrypoint: dockerize -wait tcp://db:3306 -timeout 50s node index.js
     environment:
       - APP_PORT=3001

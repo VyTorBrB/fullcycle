@@ -1,0 +1,19 @@
+<h1>Full Cycle Rocks!</h1>
+
+<h2>Nota para o reviewer:</h2>
+
+<p>
+  Por fins didaticos eu limitei a integração com o banco a apenas checar se está
+  up (via dockerize) Não foi do meu intuito subir um banco, fazer seed e
+  disponibilizar para gravação e leitura acredito que isso seja muito mais
+  relacionado a DB doque a containers e comunicação entre eles, por isso estou
+  salvando e servindo os users em memoria
+</p>
+
+<p>
+  Rotas (Desconsidere o uso correto dos verbos HTTP, isso é uma demo simplória):
+  <br />
+  GET /add-user?name=USER_NAME - add um user no array em memoria
+  <br />
+  GET /list-users - retorna todos os usarios do array em memoria
+</p>

@@ -1,14 +1,20 @@
 const express = require("express");
+const path = require("path");
 const app = express();
-const port = process.env.APP_PORT;
+const port = process.env.APP_PORT ?? 3005;
 
-app.get("/", (_req, res) => {
-  res.send("<h1>Full Cycle Rocks!</h1>");
+const users = [];
+
+app.use("/", express.static(path.resolve(__dirname, "html")));
+
+app.get("/add-user", (req, res) => {
+  const { name } = req.query;
+  users.push(name);
+  res.json(users);
 });
 
-// Add a test API route
-app.get("/api/test", (_req, res) => {
-  res.json({ message: "API is working!" });
+app.get("/list-users", (req, res) => {
+  res.json(users);
 });
 
 app.listen(port, () => {

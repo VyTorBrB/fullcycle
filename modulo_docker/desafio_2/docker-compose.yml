@@ -11,8 +11,6 @@ services:
       context: .
       dockerfile: Dockerfile.app
     restart: always
-    volumes:
-      - ./src/app:/app/
     environment:
       - APP_PORT=3001
     expose:
